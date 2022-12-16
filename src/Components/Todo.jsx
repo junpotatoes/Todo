@@ -1,5 +1,4 @@
-import { useState } from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const SearchDiv = styled.li`
   display: flex;
@@ -10,21 +9,21 @@ const ResultDiv = styled.div`
 
 export default function Todo({ todo, fetchData }) {
   function del() {
-    if (window.confirm("삭제 하시겠습니까?")) {
+    if (window.confirm('삭제 하시겠습니까?')) {
       fetch(`http://localhost:3001/todos/${todo.id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       }).then(() => {
         fetchData();
       });
     }
   }
   function edit() {
-    const editContent = window.prompt("수정할 내용적어라");
+    const editContent = window.prompt('수정할 내용적어라');
     if (editContent) {
       fetch(`http://localhost:3001/todos/${todo.id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           id: todo.id,
