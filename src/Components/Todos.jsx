@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Todo from "./Todo";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Todo from './Todo.jsx';
 
 const TodoInputWrapper = styled.div`
   box-sizing: border-box;
@@ -38,10 +38,10 @@ const CheckButton = styled.button`
 
 export default function Todos() {
   const [todos, setTodos] = useState(null);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const fetchData = async () => {
-    const res = await fetch("http://localhost:3001/todos");
+    const res = await fetch('http://localhost:3001/todos');
     const data = await res.json();
     console.log(data);
     setTodos(data);
@@ -62,17 +62,18 @@ export default function Todos() {
 
     setTodos([...todos, newTodo]);
 
-    fetch("http://localhost:3001/todos", {
-      method: "POST",
+    fetch('http://localhost:3001/todos', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         content: newTodo,
       }),
+    }).then(() => {
+      fetchData();
+      setValue('');
     });
-    fetchData();
-    setValue("");
   }
 
   return (
@@ -82,8 +83,8 @@ export default function Todos() {
           <TodoInput
             value={value}
             onChange={handleOnchnage}
-            type={"text"}
-            name={"todo"}
+            type={'text'}
+            name={'todo'}
           />
 
           <CheckButton>+</CheckButton>
@@ -94,7 +95,7 @@ export default function Todos() {
           ? todos.map((todo) => (
               <Todo key={todo.id} todo={todo} fetchData={fetchData} />
             ))
-          : ""}
+          : ''}
       </ul>
     </div>
   );

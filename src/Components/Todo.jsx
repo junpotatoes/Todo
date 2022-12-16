@@ -12,9 +12,7 @@ export default function Todo({ todo, fetchData }) {
     if (window.confirm('삭제 하시겠습니까?')) {
       fetch(`http://localhost:3001/todos/${todo.id}`, {
         method: 'DELETE',
-      }).then(() => {
-        fetchData();
-      });
+      }).then(fetchData);
     }
   }
   function edit() {
@@ -29,9 +27,7 @@ export default function Todo({ todo, fetchData }) {
           id: todo.id,
           content: editContent,
         }),
-      });
-
-      fetchData();
+      }).then(fetchData);
     }
   }
   return (
